@@ -13,7 +13,6 @@ fun <T, U> foldLeft(list: List<T>, z: U, f: (U, T)->U): U {
 
 fun sum(list: List<Int>) = foldLeft(list, 0, Int::plus)
 
-fun <T> prepend(list: List<T>, elem: T): List<T> = listOf(elem) + list
 fun  prepend(t: Char, u: String): String = "$t$u"
 
 fun string(list: List<Char>) = foldLeft(list, "", String::plus)
