@@ -20,6 +20,9 @@ fun <T> List<T>.tail(): List<T> =
     else
         this.drop(1)
 
-fun makeString_test(){
-    println(makeString(listOf("ab", "bc", "cd"), "|"))
-}
+
+fun <T> makeString2(list: List<T>, delim: String): String =
+    foldLeft(list, "") {s: String, t: T ->  if (s.isEmpty()) "$t" else "$s$delim$t"}
+
+fun <T> makeString3(list: List<T>, delim: String): String =
+    foldRight(list, "") {t: T, s: String ->  if (s.isEmpty()) "$t" else "$t$delim$s"}
