@@ -35,4 +35,12 @@ internal class ListTest{
         val str = list1.toString()
         assert(str == "[3, NIL]")
     }
+
+    @Test
+    fun listTest_drop(){
+        val list = List(1, 2, 3, 4, 5)
+        val list1 = list.drop(3)
+        val str = list1.toString()
+        assert(str == "[4, 5, NIL]")
+    }
 }
