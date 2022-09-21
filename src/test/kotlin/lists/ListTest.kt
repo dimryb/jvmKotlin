@@ -2,17 +2,17 @@ package lists
 
 import org.junit.jupiter.api.Test
 
-internal class ListTest{
+internal class ListTest {
 
     @Test
-    fun listTest_toString(){
+    fun listTest_toString() {
         val list = List(1, 2)
         val str = list.toString()
         assert(str == "[1, 2, NIL]")
     }
 
     @Test
-    fun listTest_cons(){
+    fun listTest_cons() {
         val list = List(1, 2)
         val list1 = list.cons(3)
         val list2 = list1.cons(4)
@@ -21,7 +21,7 @@ internal class ListTest{
     }
 
     @Test
-    fun listTest_setHead(){
+    fun listTest_setHead() {
         val list = List(1, 2)
         val list1 = list.setHead(3)
         val str = list1.toString()
@@ -29,7 +29,7 @@ internal class ListTest{
     }
 
     @Test
-    fun listTest_setHead_2(){
+    fun listTest_setHead_2() {
         val list = List(1)
         val list1 = list.setHead(3)
         val str = list1.toString()
@@ -37,9 +37,19 @@ internal class ListTest{
     }
 
     @Test
-    fun listTest_drop(){
+    fun listTest_drop() {
         val list = List(1, 2, 3, 4, 5)
         val list1 = list.drop(3)
+        val str = list1.toString()
+        assert(str == "[4, 5, NIL]")
+    }
+
+    @Test
+    fun listTest_dropWhile() {
+        val list = List(1, 2, 3, 4, 5)
+        val list1 = list.dropWhile {
+            it != 4
+        }
         val str = list1.toString()
         assert(str == "[4, 5, NIL]")
     }

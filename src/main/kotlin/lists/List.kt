@@ -13,6 +13,8 @@ sealed class List<A> {
 
     fun drop(n: Int): List<A> = drop(this, n)
 
+    fun dropWhile(p: (A) -> Boolean): List<A> = dropWhile(this, p)
+
     private object Nil : List<Nothing>() {
 
         override fun isEmpty() = true
@@ -42,6 +44,11 @@ sealed class List<A> {
         tailrec fun <A> drop(list: List<A>, n: Int): List<A> = when (list) {
             Nil -> list
             is Cons -> if (n <= 0) list else drop(list.tail, n - 1)
+        }
+
+        tailrec fun <A> dropWhile(list: List<A>, p: (A) -> Boolean): List<A> = when(list) {
+            Nil -> list
+            is Cons -> if (p(list.head)) dropWhile(list.tail, p) else list
         }
 
         operator fun <A> invoke(vararg az: A): List<A> =
