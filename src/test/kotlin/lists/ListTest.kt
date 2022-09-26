@@ -53,4 +53,12 @@ internal class ListTest {
         val str = list1.toString()
         assert(str == "[4, 5, NIL]")
     }
+
+    @Test
+    fun listTest_reverse() {
+        val list = List( 1, 2, 3, 4, 5)
+        val list1 = list.reverse()
+        val str = list1.toString()
+        assert(str == "[5, 4, 3, 2, 1, NIL]")
+    }
 }

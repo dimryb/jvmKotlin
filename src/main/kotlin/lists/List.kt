@@ -15,6 +15,8 @@ sealed class List<A> {
 
     fun dropWhile(p: (A) -> Boolean): List<A> = dropWhile(this, p)
 
+    fun reverse(): List<A> = reverse(List.invoke(), this)
+
     private object Nil : List<Nothing>() {
 
         override fun isEmpty() = true
@@ -46,10 +48,16 @@ sealed class List<A> {
             is Cons -> if (n <= 0) list else drop(list.tail, n - 1)
         }
 
-        tailrec fun <A> dropWhile(list: List<A>, p: (A) -> Boolean): List<A> = when(list) {
+        tailrec fun <A> dropWhile(list: List<A>, p: (A) -> Boolean): List<A> = when (list) {
             Nil -> list
             is Cons -> if (p(list.head)) dropWhile(list.tail, p) else list
         }
+
+        tailrec fun <A> reverse(acc: List<A>, list: List<A>): List<A> =
+            when (list) {
+                Nil -> acc
+                is Cons -> reverse(acc.cons(list.head), list.tail)
+            }
 
         operator fun <A> invoke(vararg az: A): List<A> =
             az.foldRight(Nil as List<A>) { a: A, list: List<A> ->
