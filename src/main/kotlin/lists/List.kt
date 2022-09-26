@@ -36,6 +36,16 @@ sealed class List<A> {
         is Cons -> ints.head + sum(ints.tail)
     }
 
+    fun product(ints: List<Int>): Int = when (ints) {
+        is Empty<Int> -> 1
+        is Cons -> ints.head * product(ints.tail)
+    }
+
+    fun product(ints: List<Double>): Double = when (ints) {
+        is Empty<Double> -> 1.0
+        is Cons -> if (ints.head == 0.0) 0.0 else ints.head * product(ints.tail)
+    }
+
     private object Nil : Empty<Nothing>() {
 
         override fun isEmpty() = true
