@@ -15,7 +15,16 @@ sealed class List<A> {
 
     fun dropWhile(p: (A) -> Boolean): List<A> = dropWhile(this, p)
 
-    fun reverse(): List<A> = reverse(List.invoke(), this)
+    fun reverse(): List<A> {
+        tailrec fun <A> reverse(acc: List<A>, list: List<A>): List<A> =
+            when (list) {
+                Nil -> acc
+                is Cons -> reverse(acc.cons(list.head), list.tail)
+            }
+        return reverse(List.invoke(), this)
+    }
+
+    fun init(): List<A> = reverse().drop(1).reverse()
 
     private object Nil : List<Nothing>() {
 

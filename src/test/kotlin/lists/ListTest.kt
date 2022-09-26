@@ -61,4 +61,11 @@ internal class ListTest {
         val str = list1.toString()
         assert(str == "[5, 4, 3, 2, 1, NIL]")
     }
+
+    @Test
+    fun listTest_init() {
+        val list = List( 1, 2, 3, 4, 5)
+        val str = list.init().toString()
+        assert(str == "[1, 2, 3, 4, NIL]")
+    }
 }
