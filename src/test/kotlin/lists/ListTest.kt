@@ -68,4 +68,18 @@ internal class ListTest {
         val str = list.init().toString()
         assert(str == "[1, 2, 3, 4, NIL]")
     }
+
+    @Test
+    fun listTest_sum() {
+        val list = List( 1, 2, 3, 4, 5)
+        val str = sum(list).toString()
+        assert(str == "15")
+    }
+
+    @Test
+    fun listTest_product() {
+        val list = List( 1.0, 2.0, 3.0)
+        val str = product(list).toString()
+        assert(str == "6.0")
+    }
 }
