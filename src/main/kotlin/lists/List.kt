@@ -19,7 +19,7 @@ sealed class List<out A> {
 
     fun dropWhile(p: (A) -> Boolean): List<A> = dropWhile(this, p)
 
-    fun reverse(): List<A> = reverse(List.invoke(), this)
+    fun reverse(): List<A> = foldLeft(Nil as List<A>) { acc -> { acc.cons(it) } }
 
     fun reverse2(): List<A> {
         tailrec fun <A> reverse2(acc: List<A>, list: List<A>): List<A> = when (list) {
@@ -33,7 +33,10 @@ sealed class List<out A> {
 
     fun <B> foldLeft(identity: B, f: (B) -> (A) -> B): B = foldLeft(identity, this, f)
 
-    fun length(): Int = foldLeft(0) { i -> { i + 1} }
+    fun length(): Int = foldLeft(0) { i -> { i + 1 } }
+
+    fun <B> foldRightViaFoldLeft(identity: B, f: (A) -> (B) -> B): B =
+        this.reverse().foldLeft(identity) { x -> { y -> f(y)(x) } }
 
     internal object Nil : List<Nothing>() {
 
