@@ -82,4 +82,11 @@ internal class ListTest {
         val str = product(list).toString()
         assert(str == "6.0")
     }
+
+    @Test
+    fun listTest_length() {
+        val list = List( 1, 2, 3, 4, 5)
+        val str = list.length().toString()
+        assert(str == "5")
+    }
 }

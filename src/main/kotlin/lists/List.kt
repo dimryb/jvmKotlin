@@ -1,6 +1,6 @@
 package lists
 
-sealed class List<A> {
+sealed class List<out A> {
 
     abstract fun isEmpty(): Boolean
 
@@ -33,7 +33,7 @@ sealed class List<A> {
 
     fun <B> foldLeft(identity: B, f: (B) -> (A) -> B): B = foldLeft(identity, this, f)
 
-    fun length(): Int = foldRight(0) { { it + 1 } }
+    fun length(): Int = foldLeft(0) { i -> { i + 1} }
 
     internal object Nil : List<Nothing>() {
 
@@ -95,9 +95,8 @@ sealed class List<A> {
                 is Cons -> foldLeft(f(acc)(list.head), list.tail, f)
             }
 
-        operator fun <A> invoke(vararg az: A): List<A> = az.foldRight(Nil as List<A>) { a: A, list: List<A> ->
-            Cons(a, list)
-        }
+        operator fun <A> invoke(vararg az: A): List<A> =
+            az.foldRight(Nil) { a: A, list: List<A> -> Cons(a, list) }
 
     }
 }
